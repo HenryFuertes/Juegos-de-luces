@@ -1,0 +1,203 @@
+//                                               UNIVERSIDAD TÉCNICA DEL NORTE
+//                                                       FICA - CIERCOM
+//                                                   SISTEMAS MICROPROCESADOS
+//                                                      HENRY FUERTES
+// JUEGOS DE LUCES
+
+//   LEDS
+
+int L1=0;//ROJO
+int L2=1;//ROJO
+int L3=2;//VERDE
+int L4=3;//VERDE
+int L5=4;//AZUL
+int L6=5;//ROJO
+int L7=6;//AZUL
+int L8=7;//AZUL
+int L9=8;//ROJO
+int L10=9;//AZUL
+int L11=10;//VERDE
+int L12=11;//VERDE
+int L13=12;//ROJO
+int L14=13;//ROJO
+
+// CONTADORES
+
+int i = 0; // CONTADOR INICIADO EN CERO, USADO PARA ACTIVAR LOS PINES Y PARA  POSICIONES DE 0 A 13.
+int k =0;  // CONTADOR INICIADO EN CERO, USADO PARA LAS REPETICONES DE CADA JUEGO DE LUCES.
+int b = 13;// CONTADOR INICIADO EN 13, USADO PARA POSICIONES DE 13 A 0 JUEGO DE LUCES 1.
+int c=6;//CONTADOR INICIADO EN 6, USADO PARA POSICIONES DE 6 A 0 JUEGO DE LUCES 2.
+
+//VECTORES:
+
+//LEDS Y POSICIONES USADOS EN EL JUEGO UNO.
+int vj1[] = {L1,L2,L3,L4,L5,L6,L7,L8,L9,L10,L11,L12,L13,L14}; 
+
+//LEDS Y POSICIONES USADOS EN EL JUEGO DOS.
+int vj2[] = {L7,L6,L5,L4,L3,L2,L1};
+int vj2_1 []= {L8,L9,L10,L11,L12,L13,L14};
+
+//LEDS Y POSICIONES USADOS EN EL JUEGO TRES.
+int vj3 []= {L14,L12,L10,L8,L6,L4,L2};
+int vj3_1[]= {L13,L11,L9,L7,L5,L3,L1};
+
+//LEDS Y POSICIONES USADOS EN EL JUEGO CUATRO.
+int vj4[]= {L14,L11,L8,L5,L2};
+int vj4_1[]= {L13,L10,L7,L2,L1};
+int vj4_2[]= {L12,L9,L6,L3};
+
+//LEDS Y POSICIONES USADOS EN EL JUEGO CINCO.
+int vj5[]={L1,L3,L5};
+int vj5_1[]={L2,L4,L7};
+int vj5_2[]={L6,L11,L8};
+int vj5_3[]={L9,L12,L10};
+
+ 
+void setup() {
+  
+  for(;i<14;i++){
+  pinMode(vj1[i],OUTPUT);// ACTIVAR LOS PINES COMO SALIDAS
+ 
+  }
+   i=0;
+  }
+ 
+
+void loop() {  // DONDE SE LLAMAN A TODOS LOS JUEGOS (PROGRAMAS)
+ 
+ j1 (); //JUEGO DE LUCES 1
+ j2 (); //JUEGO DE LUCES 2
+ j3 (); //JUEGO DE LUCES 3
+ j4 (); //JUEGO DE LUCES 4
+ j5 (); //JUEGO DE LUCES 5
+  }
+
+//JUEGO LUCES 1 : ENCIENDE CADA LED DESDE LA POSICION CERO HASTA LA 14 DE UNO EN UNO Y SE APAGAN DE UNO EN UNO DESDE LA POSICION 14 HASTA LA 0
+void j1 (){
+for(;k<2;k++){ 
+  for(;i<14;i++){ 
+  
+digitalWrite (vj1[i],HIGH); 
+delay (200);
+digitalWrite (vj1[i],LOW);
+  delay (200);}
+  i=0;
+  
+   for(;b>=0;b--){ 
+  
+digitalWrite (vj1[b],HIGH); // PONENR EN ALTO EL PIN 0
+delay (200);// milisengos, deten el programa
+digitalWrite (vj1[b],LOW);
+  delay (200);}
+  b=13;
+}
+k=0;
+}
+
+//JUEGO DE LUCES 2: ENCIENDE DE DOS EN DOS LOS LEDS DE ADENTRO HACIA AFUERA DESDE LAS POSICIONES CENTRALES HASTA LAS EXTERIORES Y VICEVERSA
+void j2 (){
+ for (;k<2;k++){
+ for (;i<7;i++){
+     digitalWrite (vj2[i],HIGH);
+     digitalWrite (vj2_1[i],HIGH);
+     delay(200);
+     digitalWrite (vj2[i],LOW);
+     digitalWrite (vj2_1 [i],LOW);
+     delay(200);
+     
+     }
+     i=0;
+     for (;c>=0;c--){
+     digitalWrite (vj2[c],HIGH);
+     digitalWrite (vj2_1 [c],HIGH);
+     delay(200);
+     digitalWrite (vj2[c],LOW);
+     digitalWrite (vj2_1 [c],LOW);
+     delay(200);
+     
+     }
+     c=6;
+     
+ }
+ k=0;
+ }
+
+ //JUEGO DE LUCES 3: ENCIENDE LOS LEDS DE DOS EN DOS SUCESIVAMENTE DESDE LA POSICION 14 HASTA LA 0 Y REGRESA ENCENDIENDO SALTANDO UN LED DESDE LA POSICION 0 HASTA LA 14
+ void j3 (){
+  for (;k<2;k++){
+   for (;i<7;i++){
+     digitalWrite (vj3[i],HIGH);
+     digitalWrite (vj3_1[i],HIGH);
+     
+     
+     delay(200);
+     digitalWrite (vj3[i],LOW);
+     digitalWrite (vj3_1[i],LOW);
+     
+     delay(200);
+       
+    
+     
+     }
+     i=0;
+    for (;c>=0;c--){  
+     digitalWrite (vj3[c],HIGH);
+     delay (200);
+     }
+     c=6;
+     for (;i<7;i++){
+       digitalWrite (vj3[i],LOW);
+       
+     }i=0;}
+     k=0;
+     }
+
+//JUEGO DE LUCES 4: ENCIEDE DOS LEDS SALTANDO UNO, DESDE LA POSICION 14 HASTA LA 0, SE APAGAN Y ENCIENDEN LOS QUE FALTANBAN.     
+void j4 (){
+      for(;k<2;k++){
+        for(;i<5;i++){
+       digitalWrite (vj4[i],HIGH);
+       digitalWrite (vj4_1[i],HIGH);
+       delay(200);}
+       i=0;
+       for(;i<5;i++){
+      digitalWrite (vj4[i],LOW);
+       digitalWrite (vj4_1[i],LOW);
+       delay (200);
+        }i=0;
+        for(;i<4;i++){
+           digitalWrite (vj4_2[i],HIGH);
+           delay (200);}
+           i=0;
+        for(;i<4;i++){
+           digitalWrite (vj4_2[i],LOW);}
+           i=0;
+           }
+           k=0;
+}
+
+//JUEGO DE LUCES 5: ENCIENDEN TODOS LOS LEDS DE UN MISMO COLOR SUCESIVAMENTE (ROJO, VERDE , AZUL)
+void j5(){
+   for (;k<2;k++){
+    for(;i<3;i++){
+       digitalWrite (vj5[i],HIGH);
+       digitalWrite (vj5_1[i],HIGH);
+       digitalWrite (vj5_2[i],HIGH);
+       digitalWrite (L13,HIGH);
+       digitalWrite (L14,HIGH);
+       
+       delay(500);}
+       i=0;
+       for(;i<5;i++){
+     digitalWrite (vj5[i],LOW);
+       digitalWrite (vj5_1[i],LOW);
+       digitalWrite (vj5_2[i],LOW);
+       digitalWrite (L13,LOW);
+       digitalWrite (L14,LOW);
+       delay (200);
+        }i=0;}
+        k=0;
+  
+  }
+          
+        
